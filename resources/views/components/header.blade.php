@@ -9,19 +9,19 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">О нас</a>
+                <a class="nav-link active" aria-current="page" href="/">О нас</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./app.html">Точить когти</a>
+                <a class="nav-link" href="/app">Точить когти</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./log.html">Вход</a>
+                <a class="nav-link" href="/signin">Вход</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./reg.html">Регистрация</a>
+                <a class="nav-link" href="./signup">Регистрация</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./cab.html">Кабинет</a>
+                <a class="nav-link" href="/lk">Кабинет</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="">Выход</a>

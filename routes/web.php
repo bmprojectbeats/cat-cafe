@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class,'index'])->name('index');
+Route::get('/lk', [UserController::class,'lk'])->name('lk');
+Route::get('/app', [UserController::class,'app'])->name('app');
+Route::get('/signin', [UserController::class,'signin'])->name('signin');
+Route::get('/signup', [UserController::class,'signup'])->name('signup');
