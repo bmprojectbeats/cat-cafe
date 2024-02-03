@@ -12,7 +12,33 @@
             <p class="title2">
                 BYajhsjis sjkaosk sakkasopsd asdkoad
             </p>
-            <button class="info__button"> Pspdls;d </button>
+            @guest
+            <button type="button" class="info__button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Pspdls;d
+            </button>
+            @endguest
+            @auth
+            <button type="button" class="info__button">
+            Pspdls;d
+            </button>
+            @endauth
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Авторизуйтесь в системе!!
+      </div>
+
+    </div>
+  </div>
+</div>
+ <!-- Модальное окно -->
+
         </div>
         <div class="main_img">
             <img src="./images/1.png" alt="ss" style="max-width: 300px;">

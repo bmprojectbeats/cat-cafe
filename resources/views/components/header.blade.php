@@ -11,21 +11,26 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">О нас</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/app">Точить когти</a>
-              </li>
+              
+              @guest
               <li class="nav-item">
                 <a class="nav-link" href="/signin">Вход</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./signup">Регистрация</a>
+                <a class="nav-link" href="/signup">Регистрация</a>
+              </li>
+              @endguest
+              @auth
+              <li class="nav-item">
+                <a class="nav-link" href="/app">Точить когти</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/lk">Кабинет</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Выход</a>
+                <a class="nav-link" href="/signout">Выход</a>
               </li>
+              @endauth
             </ul>
           </div>
         </div>
