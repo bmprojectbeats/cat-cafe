@@ -13,7 +13,12 @@ class UserController extends Controller
     return view("index");
    }
    function lk(){
-    return view("lk");
+      $user_id = Auth::user()->id;
+      $user = User::find($user_id);
+      if($user){
+         return view("lk", compact("user"));
+      }
+    
    }
    function app(){
     return view("app");
@@ -26,6 +31,16 @@ class UserController extends Controller
       return view("signup");
    }
    function signup_valid(Request $request){
+      $request->validate([
+         "email" => "required|email",
+         "password" => "required",
+         "name" => "required|regex:/^[а-яА-Я]+$/",
+      ],[
+         "email.required" => "Обязательно поле",
+         "password.required" => "Обязательное поле",
+         "name.required" => "Обязательное поле",
+         "name.regex" => "Только кириллица",
+      ]);
       if($request->password == $request->password_check){
          $user = User::create([
             "name" => $request->name,

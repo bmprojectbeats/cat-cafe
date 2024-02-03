@@ -18,9 +18,9 @@
             </button>
             @endguest
             @auth
-            <button type="button" class="info__button">
+            <a href="/app" class="btn btn-info">
             Pspdls;d
-            </button>
+            </a>
             @endauth
 <!-- Модальное окно -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

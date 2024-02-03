@@ -10,9 +10,9 @@
         <div class="center">
           <div class="card " style="width: 18rem;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Моя инфа:</li>
-        <li class="list-group-item">Имя:</li>
-        <li class="list-group-item">Почта:</li>
+        <li class="list-group-item">Моя инфа: </li>
+        <li class="list-group-item">Имя: {{$user->name}}</li>
+        <li class="list-group-item">Почта: {{$user->email}}</li>
       </ul>
     </div>
 
