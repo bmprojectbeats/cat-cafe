@@ -2,26 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Cat;
+use App\Models\Time;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
    function index(){
-    return view("index");
+      $cats = Cat::all();
+    return view("index", compact("cats"));
    }
    function lk(){
       $user_id = Auth::user()->id;
       $user = User::find($user_id);
+      $apps = Application::where('user_id', $user_id)->join("times", "applications.time_id", "=", "times.id")->join("users", "applications.user_id", "=", "users.id")->join("cats", "applications.cat_id", "=", "cats.id")->join("statuses", "applications.status_id", "=", "statuses.id")->get();
       if($user){
-         return view("lk", compact("user"));
+         return view("lk", compact("user"), compact("apps"));
       }
     
    }
    function app(){
-    return view("app");
+
+      $cats = Cat::all();
+      $times = Time::all();
+    return view("app", compact("cats"), compact("times"));
+   }
+   function app_let(Request $request){
+      $request->validate([
+         "cat" => "required",
+         "time"=> "required",
+      ]);
+      $app = Application::create([
+         "user_id" => Auth::user()->id,
+         "cat_id" => $request->cat,
+         "time_id" => $request->time,
+         "status_id" => 1,
+      ]);
+      if($app){
+         return redirect('/lk');
+      }
    }
    function signin(){
       return view("signin");

@@ -23,13 +23,15 @@
      
       </p>
       <div class="collapse" id="collapseExample">
+        @foreach($apps as $app)
         <div class="card " style="width: 18rem;">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Время</li>
-            <li class="list-group-item">Статус:</li>
-            <li class="list-group-item">Кот:</li>
+            <li class="list-group-item">Время: {{$app->time_title}}</li>
+            <li class="list-group-item">Статус: {{$app->status_title}}</li>
+            <li class="list-group-item">Кот: {{$app->cat_name}}</li>
           </ul>
         </div>
+        @endforeach
       </div>
 
      

@@ -41,7 +41,7 @@
 
         </div>
         <div class="main_img">
-            <img src="./images/1.png" alt="ss" style="max-width: 300px;">
+            <img src="./images/cat1.png" alt="ss" style="max-width: 300px;">
         </div>
       </div>
       <div class="main center"> 
@@ -69,30 +69,16 @@
                 </div>
                 </div>  
                 <div class="cats__cards">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./images/1.png" class="card-img-top" alt="...">
+                @foreach($cats as $cat)
+                <div class="card" style="width: 18rem;">
+                        <img src="./images/{{$cat->avatar}}" class="card-img-top cats__img" alt="...">
                         <div class="card-body">
-                          <h5 class="card-title">Заголовок карточки</h5>
-                          <p class="card-text">Небольшой пример текста, который должен основываться на названии карточки и составлять основную часть содержимого карты.</p>
+                          <h5 class="card-title">{{$cat->cat_name}}</h5>
+                          <p class="card-text">{{$cat->description}}</p>
            
                         </div>
                       </div>
-                      <div class="card" style="width: 18rem;">
-                        <img src="./images/1.png" class="card-img-top cats__img" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Заголовок карточки</h5>
-                          <p class="card-text">Небольшой пример текста, который должен основываться на названии карточки и составлять основную часть содержимого карты.</p>
-           
-                        </div>
-                      </div>
-                      <div class="card" style="width: 18rem;">
-                        <img src="./images/3.jpg" class="card-img-top cats__img" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Заголовок карточки</h5>
-                          <p class="card-text">Небольшой пример текста, который должен основываться на названии карточки и составлять основную часть содержимого карты.</p>
-           
-                        </div>
-                      </div>
+                @endforeach                  
                 </div>
                 
             </div>
