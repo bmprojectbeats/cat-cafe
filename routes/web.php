@@ -22,3 +22,5 @@ Route::get('/signup', [UserController::class,'signup'])->name('signup');
 Route::post('/signup_valid', [UserController::class,'signup_valid'])->name('signup_valid');
 Route::post('/signin_valid', [UserController::class,'signin_valid'])->name('signin_valid');
 Route::get('/signout', [UserController::class,'signout'])->name('signout');
+
+Route::get('/filt_categ/{id}', [UserController::class,'filt_categ'])->name('filt_categ');

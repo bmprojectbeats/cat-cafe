@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cat;
@@ -14,7 +15,13 @@ class UserController extends Controller
 {
    function index(){
       $cats = Cat::all();
-    return view("index", compact("cats"));
+      $categories = Category::all();
+      return view("index", compact("cats"), compact("categories"));
+   }
+   function filt_categ($id){
+      $cats = Cat::where("category_id", $id)->get();
+      $categories = Category::all();
+      return view("index", compact("cats"), compact("categories"));
    }
    function lk(){
       $user_id = Auth::user()->id;
