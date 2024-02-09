@@ -24,8 +24,10 @@
     <select class="form-select" aria-label="Default select example" style="max-width: 300px;" name="time">
       <option selected disabled>время вбыирать</option>
       @foreach($times as $time)
-      <option value="{{$time->id}}">{{$time->time_title}}</option>
+      
+      <option value="{{$time->time_title}}">{{$time->time_title}}</option>
       @endforeach
+      
     </select>
     @error('time')
             {{$message}}
@@ -36,8 +38,10 @@
       
                  
               @foreach($cats as $cat)
+              <input type="text" value="{{$cat->id}}" name="cat_id" style="display: none;">
               <label>
-              <input type="radio" class="card-input-element" name="cat" value="{{$cat->id}}"/>
+              <input type="radio" class="card-input-element" name="cat" value="{{$cat->cat_name}}"/>
+              
                 <div class="panel panel-default card-input">
                   <div class="card" style="width: 18rem;">
                     <img src="./images/{{$cat->avatar}}" class="card-img-top cats__img" alt="...">

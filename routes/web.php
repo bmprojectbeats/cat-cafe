@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,6 @@ Route::post('/signin_valid', [UserController::class,'signin_valid'])->name('sign
 Route::get('/signout', [UserController::class,'signout'])->name('signout');
 
 Route::get('/filt_categ/{id}', [UserController::class,'filt_categ'])->name('filt_categ');
+Route::get('/admin', [AdminController::class,'index'])->name('admin');
+Route::get('/accept/{id}', [AdminController::class,'accept'])->name('accept');
+Route::get('/decline/{id}', [AdminController::class,'decline'])->name('decline');

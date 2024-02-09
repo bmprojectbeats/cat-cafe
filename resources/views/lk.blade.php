@@ -26,7 +26,7 @@
         @foreach($apps as $app)
         <div class="card " style="width: 18rem;">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Время: {{$app->time_title}}</li>
+            <li class="list-group-item">Время: {{$app->time}}</li>
             <li class="list-group-item">Статус: {{$app->status_title}}</li>
             <li class="list-group-item">Кот: {{$app->cat_name}}</li>
           </ul>

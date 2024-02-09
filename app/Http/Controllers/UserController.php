@@ -26,7 +26,7 @@ class UserController extends Controller
    function lk(){
       $user_id = Auth::user()->id;
       $user = User::find($user_id);
-      $apps = Application::where('user_id', $user_id)->join("times", "applications.time_id", "=", "times.id")->join("users", "applications.user_id", "=", "users.id")->join("cats", "applications.cat_id", "=", "cats.id")->join("statuses", "applications.status_id", "=", "statuses.id")->get();
+      $apps = Application::where('user_id', $user_id)->join("users", "applications.user_id", "=", "users.id")->join("cats", "applications.cat_id", "=", "cats.id")->join("statuses", "applications.status_id", "=", "statuses.id")->get();
       if($user){
          return view("lk", compact("user"), compact("apps"));
       }
@@ -44,9 +44,11 @@ class UserController extends Controller
          "time"=> "required",
       ]);
       $app = Application::create([
+         "user" => Auth::user()->name,
          "user_id" => Auth::user()->id,
-         "cat_id" => $request->cat,
-         "time_id" => $request->time,
+         "cat" => $request->cat,
+         "cat_id" => $request->cat_id,
+         "time" => $request->time,
          "status_id" => 1,
       ]);
       if($app){
