@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Models\Cat;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,5 +26,13 @@ class AdminController extends Controller
         if($app){
             return redirect("/admin");
         }
+    }
+    function cats(){
+        $cats = Cat::all();
+        return view("admin/cats",compact("cats"));
+    }
+    function delete_cat($id){
+        $cat = Cat::where("id", $id)->delete();
+        return redirect("/cats");
     }
 }

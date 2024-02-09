@@ -28,3 +28,6 @@ Route::get('/filt_categ/{id}', [UserController::class,'filt_categ'])->name('filt
 Route::get('/admin', [AdminController::class,'index'])->name('admin');
 Route::get('/accept/{id}', [AdminController::class,'accept'])->name('accept');
 Route::get('/decline/{id}', [AdminController::class,'decline'])->name('decline');
+Route::get('/cats', [AdminController::class,'cats'])->name('cats');
+
+Route::get('/delete_cat/{$id}', [AdminController::class,'delete_cat'])->name('delete_cat');
