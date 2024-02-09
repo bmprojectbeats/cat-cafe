@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 06 2024 г., 12:18
+-- Время создания: Фев 09 2024 г., 10:19
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -29,9 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `applications` (
   `id` bigint UNSIGNED NOT NULL,
-  `time_id` bigint UNSIGNED NOT NULL,
-  `cat_id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
+  `cat_id` bigint UNSIGNED NOT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -41,9 +43,8 @@ CREATE TABLE `applications` (
 -- Дамп данных таблицы `applications`
 --
 
-INSERT INTO `applications` (`id`, `time_id`, `cat_id`, `user_id`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, 1, '2024-02-06 05:42:26', '2024-02-06 05:42:26'),
-(2, 2, 2, 2, 1, '2024-02-06 06:04:32', '2024-02-06 06:04:32');
+INSERT INTO `applications` (`id`, `user_id`, `cat_id`, `user`, `cat`, `time`, `status_id`, `created_at`, `updated_at`) VALUES
+(7, 2, 2, 'Manya', 'Василий', '12:00 - 14:00', 3, '2024-02-09 03:30:50', '2024-02-09 03:45:27');
 
 -- --------------------------------------------------------
 
@@ -241,10 +242,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 ALTER TABLE `applications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `time_id` (`time_id`,`cat_id`,`user_id`),
+  ADD KEY `status_id` (`status_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `cat_id` (`cat_id`),
-  ADD KEY `status_id` (`status_id`);
+  ADD KEY `cat_id` (`cat_id`);
 
 --
 -- Индексы таблицы `categories`
@@ -313,7 +313,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -371,10 +371,9 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `applications`
 --
 ALTER TABLE `applications`
-  ADD CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`time_id`) REFERENCES `times` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `applications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `applications_ibfk_3` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `applications_ibfk_4` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `applications_ibfk_4` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `applications_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `applications_ibfk_6` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `cats`
