@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 09 2024 г., 10:19
+-- Время создания: Фев 10 2024 г., 09:49
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -133,7 +133,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2024_02_06_081140_create_applications_table', 2),
 (7, '2024_02_06_081147_create_times_table', 2),
 (8, '2024_02_06_081354_create_categories_table', 2),
-(9, '2024_02_06_084657_create_statuses_table', 3);
+(9, '2024_02_06_084657_create_statuses_table', 3),
+(10, '2024_02_10_062743_create_roles_table', 4);
 
 -- --------------------------------------------------------
 
@@ -165,6 +166,27 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint UNSIGNED NOT NULL,
+  `role_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `roles`
+--
+
+INSERT INTO `roles` (`id`, `role_title`, `created_at`, `updated_at`) VALUES
+(1, 'Администратор', NULL, NULL),
+(2, 'Клиент', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -218,6 +240,7 @@ INSERT INTO `times` (`id`, `time_title`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -229,9 +252,10 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`) VALUES
-(1, 'Brio', 'dd@mail.ru', NULL, '$2y$12$bg78.qknezuH/Z5uuVjs0eEhnP.MCgKvY5f/yXElRN6hCHIpvFhk2', NULL),
-(2, 'Manya', 'lsd@mail.ru', NULL, '$2y$12$UyElRPOwsvXV0RnYArE/eenJzWamFv6CDUtBSMHGeTQCELbyQwQgO', NULL);
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`) VALUES
+(1, 2, 'Brio', 'dd@mail.ru', NULL, '$2y$12$bg78.qknezuH/Z5uuVjs0eEhnP.MCgKvY5f/yXElRN6hCHIpvFhk2', NULL),
+(2, 2, 'Manya', 'lsd@mail.ru', NULL, '$2y$12$UyElRPOwsvXV0RnYArE/eenJzWamFv6CDUtBSMHGeTQCELbyQwQgO', NULL),
+(3, 1, 'admin', 'admin@admin', NULL, '$2y$12$UyElRPOwsvXV0RnYArE/eenJzWamFv6CDUtBSMHGeTQCELbyQwQgO', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -287,6 +311,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Индексы таблицы `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `statuses`
 --
 ALTER TABLE `statuses`
@@ -303,7 +333,8 @@ ALTER TABLE `times`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -337,13 +368,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `statuses`
@@ -361,7 +398,7 @@ ALTER TABLE `times`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -380,6 +417,12 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `cats`
   ADD CONSTRAINT `cats_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
