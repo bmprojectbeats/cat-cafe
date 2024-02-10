@@ -25,6 +25,10 @@ Route::post('/signin_valid', [UserController::class,'signin_valid'])->name('sign
 Route::get('/signout', [UserController::class,'signout'])->name('signout');
 
 Route::get('/filt_categ/{id}', [UserController::class,'filt_categ'])->name('filt_categ');
+
+Route::get('/signin_adm', [AdminController::class,'signin'])->name('signin_adm');
+Route::post('/signin_valid_adm', [AdminController::class,'signin_valid'])->name('signin_valid_adm');
+
 Route::get('/admin', [AdminController::class,'index'])->name('admin');
 Route::get('/accept/{id}', [AdminController::class,'accept'])->name('accept');
 Route::get('/decline/{id}', [AdminController::class,'decline'])->name('decline');

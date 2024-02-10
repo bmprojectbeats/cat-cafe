@@ -6,7 +6,7 @@ use App\Models\Application;
 use App\Models\User;
 use App\Models\Cat;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     function index(){
@@ -35,4 +35,19 @@ class AdminController extends Controller
         $cat = Cat::where("id", $id)->delete();
         return redirect("/cats");
     }
+    function signin(){
+        return view("admin/signin");
+    }
+    function signin_valid(Request $request){
+        $user = Auth::attempt([
+           "email" => $request->email,
+           "role_id" => 1,
+           "password"=> $request->password,
+        ]);
+        if($user){
+           return redirect("/admin");
+        } else {
+           return redirect()->back()->with("error","Данные отсутствуют");
+        }
+     }
 }

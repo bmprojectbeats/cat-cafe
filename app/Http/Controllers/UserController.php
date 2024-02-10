@@ -89,6 +89,7 @@ class UserController extends Controller
    function signin_valid(Request $request){
       $user = Auth::attempt([
          "email" => $request->email,
+         "role_id" => 2,
          "password"=> $request->password,
       ]);
       if($user){

@@ -9,10 +9,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+              @if(Auth::check())
+              @if(Auth::user()->role_id == 2)
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">О нас</a>
               </li>
-              
+              @endif
+              @else
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">О нас</a>
+              </li>
+              @endif
               @guest
               <li class="nav-item">
                 <a class="nav-link" href="/signin">Вход</a>
@@ -20,8 +27,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="/signup">Регистрация</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signin_adm">Админ</a>
+              </li>
               @endguest
+
               @auth
+              @if(Auth::user()->role_id == 2)
               <li class="nav-item">
                 <a class="nav-link" href="/app">Точить когти</a>
               </li>
@@ -31,6 +43,18 @@
               <li class="nav-item">
                 <a class="nav-link" href="/signout">Выход</a>
               </li>
+              @endif
+              @if(Auth::user()->role_id == 1)
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">Заявки</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/cats">Котики</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signout">Выход</a>
+              </li>
+              @endif
               @endauth
             </ul>
           </div>
