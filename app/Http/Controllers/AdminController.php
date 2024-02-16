@@ -42,6 +42,11 @@ class AdminController extends Controller
             'description'=> 'required',
             'image' => 'required',
             'category_id' => 'required',
+        ],[
+            'cat_name.required' => 'Обязательное поле',
+            'description.required' => 'Обязательное поле',
+            'image.required' => 'Обязательное поле',
+            'category_id.required' => 'Обязательное поле',
         ]);
         $file_name = $request->file('image')->getClientOriginalName();
         $file = $request->file('image')->move(public_path('images/'), $file_name);
