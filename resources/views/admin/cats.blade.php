@@ -27,30 +27,39 @@
   <div class="mb-3">
     <label class="form-label">Кличка</label>
     <input type="text" class="form-control" name="cat_name">
-    <div class="form-text">We'll never share your email with anyone else.</div>
+    @error('cat_name')
+            {{$message}}
+            @enderror
   </div>
   
   <div class="mb-3">
     <label class="form-label">Описание</label>
     <input type="text" class="form-control" name="description">
-    <div class="form-text">We'll never share your email with anyone else.</div>
+    @error('description')
+            {{$message}}
+            @enderror
   </div>
 
   <div class="mb-3">
     <label class="form-label">Категория</label>
     <select name="category_id" class="form-control">
-        <option selected disable>Выберите категорию</option>
 
-        <option value=""></option>
 
+        <option value="1">Смешные котики</option>
+        <option value="2">Грустные котики</option>
+        <option value="3">Крутые котики</option>
     </select>
-    <div class="form-text">We'll never share your email with anyone else.</div>
+    @error('category_id')
+            {{$message}}
+            @enderror
   </div>
 
   <div class="mb-3">
     <label class="form-label">Фото</label>
-    <input type="file" class="form-control" name="avatar">
-    <div class="form-text">We'll never share your email with anyone else.</div>
+    <input type="file" class="form-control" name="image">
+    @error('image')
+            {{$message}}
+            @enderror
   </div>
   <button type="submit" class="btn btn-primary">Добавить</button>
 </form>

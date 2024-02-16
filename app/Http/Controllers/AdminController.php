@@ -32,8 +32,28 @@ class AdminController extends Controller
         return view("admin/cats",compact("cats"));
     }
     function delete_cat($id){
+       
         $cat = Cat::where("id", $id)->delete();
         return redirect("/cats");
+    }
+    function add_cat(Request $request){
+        $request->validate([
+            'cat_name'=> 'required',
+            'description'=> 'required',
+            'image' => 'required',
+            'category_id' => 'required',
+        ]);
+        $file_name = $request->file('image')->getClientOriginalName();
+        $file = $request->file('image')->move(public_path('images/'), $file_name);
+        $cat = Cat::create([
+            'cat_name' => $request->cat_name,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'avatar' => $file_name,
+        ]);
+        if($cat){
+            return redirect('/cats');
+        }
     }
     function signin(){
         return view("admin/signin");

@@ -34,4 +34,5 @@ Route::get('/accept/{id}', [AdminController::class,'accept'])->name('accept');
 Route::get('/decline/{id}', [AdminController::class,'decline'])->name('decline');
 Route::get('/cats', [AdminController::class,'cats'])->name('cats');
 
-Route::get('/delete_cat/{$id}', [AdminController::class,'delete_cat'])->name('delete_cat');
+Route::get('/delete_cat/{id}', [AdminController::class,'delete_cat'])->name('delete_cat');
+Route::post('/add_cat', [AdminController::class,'add_cat'])->name('add_cat');
